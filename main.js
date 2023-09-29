@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         coderchatzoom
-// @namespace    http://tampermonkey.net/
-// @version      1.3
+// @namespace    https://github.com/blankitolv/coderhouse_chat_intime_zoom
+// @version      1.6
 // @description  try to take over the world!
 // @author       @blankitolv
 // @match        https://coderhouse.zoom.us/rec/play/*
@@ -20,7 +20,6 @@
 
   // programa principal
   const mysoft = () => {
-    sweetMessage();
     // bandera para saber si el script debe correr o no
     let running = true;
     let myBox = document.querySelector(".transcript .single-wrapper");
@@ -30,15 +29,17 @@
     container.innerHTML = `
   <a href="#" id="lucas_pause">❎</a>
   <a href="#" id="lucas_play">✅</a>
-  <b>status: <span id="status_lucas"></span></b>
+  <b>status: <span id="status_lucas">running</span></b>
   `;
     myBox.appendChild(container);
 
     // botones de play y pause
-    document.getElementById("status_lucas").innerHTML = "running";
+    // 
+    // document.getElementById("status_lucas").innerHTML = "running";
     let lucas_pause = document
       .getElementById("lucas_pause")
       .addEventListener("click", (e) => {
+        sweetMessage('script pause',3000)
         e.preventDefault();
         running = false;
         document.getElementById("status_lucas").innerHTML = "pause";
@@ -46,6 +47,7 @@
     let lucas_play = document
       .getElementById("lucas_play")
       .addEventListener("click", (e) => {
+        sweetMessage('script running',3000)
         e.preventDefault();
         running = true;
         document.getElementById("status_lucas").innerHTML = "running";
@@ -61,10 +63,7 @@
       });
       each_button_toggle.dispatchEvent(eventoClic);
     });
-    console.log(
-      "🟢 Se expandieron todas las contestaciones ",
-      toggle_buttons.length
-    );
+    console.log("🟢 Se expandieron todas las contestaciones ",toggle_buttons.length);
 
     // se toman todos los "time" de los mensajes
     let all = document.querySelectorAll(".time");
@@ -102,6 +101,7 @@
       each_hs.setAttribute("data-lucasTime", hora_formateada);
     });
     console.log("🟢 Se modificaron " + all.length + " mensajes del chat");
+
     console.log("🟢 Se asignaron datos propios al html");
 
     // loop - mueve mensaje del chat hacia arriba
@@ -122,32 +122,50 @@
     };
     console.log("🟢 Comienza a correr el script, que disfrutes la clase");
 
+    let secondMessage = `
+    🟢 Se modificaron ${all.length} mensajes del chat \t\r
+    🟢 Se asignaron datos propios al html \t\r
+    🟢 Comienza a correr el script, que disfrutes la clase \t\r`
+    
+    sweetMessage(secondMessage,8000);
+
     setInterval(() => moveChat(), 1000);
   };
 
   // verifica si el reproductor comenzó, y comienza el programa
   const checkBegin = () => {
-    let rnow = document
-      .querySelector(".vjs-time-range-current")
-      .textContent.trim(" ");
-    if (rnow != "00:00:00") {
+    let rnow
+    if (document.querySelector(".vjs-time-range-current")==null){
+      return
+    } else if (document.querySelector(".vjs-time-range-current").textContent.trim(" ")=="00:00:00") {
       clearInterval(interval_begin);
       mysoft();
-    } else {
-      console.log(
-        "ESPERANDO comienzo del video... --- Script creado Blankitolv 🤓"
-      );
     }
+    // rnow = document.querySelector(".vjs-time-range-current").textContent.trim(" ")
+    // if (rnow != "00:00:00") {
+    // } else {
+    //   console.log("ESPERANDO comienzo del video... --- Script creado Blankitolv 🤓");
+    // }
   };
-  const sweetMessage = () => {
+  const sweetMessage = (msg,time) => {
     setTimeout(() => {
-      Swal.fire({
-        position: "top-end",
-        icon: "success",
-        title: "CoderMessage charge, enjoy you class",
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
         showConfirmButton: false,
-        timer: 1900,
-      });
+        timer: time,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+      
+      Toast.fire({
+        icon: 'success',
+        title: 'CoderZoom Chat',
+        text: msg
+      })
     }, 1000);
   };
   
