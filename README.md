@@ -8,4 +8,12 @@
 
 
 ## Installation
+### Pegar codigo en la consola todo el tiempo
+El código se puede inyectar en la consola cada vez que se quiera utilizar
 
+### Inyectarlo mediante tampermonkey
+```sh
+descargar tampermonkey de las extensiones de google chrome / firefox
+abrir extensión tampermonkey
+utilidades -> importar -> main.js
+```
