@@ -1,4 +1,12 @@
+/**
+ * Author: Lucas Vega
+ * repository proyect: www.github.com/blankitolv/coderhouse_chat_intime_zoom
+ * my repository: www.github.com/blankitolv
+ */
+
+// programa principal
 const mysoft = () => {
+  // bandera para saber si el script debe correr o no
   let running = true
   let myBox = document.querySelector('.transcript .single-wrapper');
   let container = document.createElement('div');
@@ -10,6 +18,8 @@ const mysoft = () => {
   <b>status: <span id="status_lucas"></span></b>
   `
   myBox.appendChild(container);
+
+  // botones de play y pause
   document.getElementById('status_lucas').innerHTML ="running";
   let lucas_pause = document.getElementById('lucas_pause').addEventListener('click',(e)=>{
     e.preventDefault();
@@ -21,6 +31,8 @@ const mysoft = () => {
     running = true;
     document.getElementById('status_lucas').innerHTML ="running";
   })
+
+  // se aplian las contestaciones de los chats
   let toggle_buttons = document.querySelectorAll('span.toggle-btn');
   toggle_buttons.forEach(each_button_toggle =>{
     const eventoClic = new MouseEvent("click", {
@@ -30,10 +42,12 @@ const mysoft = () => {
     });
     each_button_toggle.dispatchEvent(eventoClic);
   })
-
-
   console.log("🟢 Se expandieron todas las contestaciones ",toggle_buttons.length)
+
+  // se toman todos los "time" de los mensajes
   let all = document.querySelectorAll('.time');
+
+  // si el time tiene el formato xx:xx se le antepone 00:XX:XX
   for (let i=0;i<=all.length-1;i++){
     let das = all[i].textContent.split(':');
     if (das.length != 3) {
@@ -43,11 +57,13 @@ const mysoft = () => {
     }
     all[i].textContent = all[i].textContent.replace(/\s/g, '');
   }
+
+
   let limpio = all[0].textContent;
   let fechaFicticia = '1970-01-01T' + limpio;
   let hora1 = new Date(fechaFicticia);
 
-  
+  // retorna tiempo con formato HH:MM:SS
   function formatTime(date) {
     const hh =  String(date.getUTCHours()).padStart(2, '0');
     const mm = String(date.getUTCMinutes()).padStart(2, '0');
@@ -55,6 +71,8 @@ const mysoft = () => {
     return `${hh}:${mm}:${ss}`;
   }
   
+  // recorre todos los mensajes y resta el valor del primer elemento 
+  // HORA2 - HORA1
   all.forEach(each_hs => {
     let each_limpio = each_hs.textContent.trim(' ');
     let aux_fecha = '1970-01-01T' + each_limpio;
@@ -67,6 +85,7 @@ const mysoft = () => {
   console.log("🟢 Se modificaron "+all.length+" mensajes del chat")
   console.log("🟢 Se asignaron datos propios al html")
   
+  // loop - mueve mensaje del chat hacia arriba
   const moveChat = () => {
     if (running == false) return
     let rnow = document.querySelector('.vjs-time-range-current').textContent.trim(' ');
@@ -85,6 +104,7 @@ const mysoft = () => {
   setInterval(()=> moveChat() ,1000)
 }
 
+// verifica si el reproductor comenzó, y comienza el programa
 const checkBegin = () => {
   let rnow = document.querySelector('.vjs-time-range-current').textContent.trim(' ');
   if (rnow != '00:00:00') {
