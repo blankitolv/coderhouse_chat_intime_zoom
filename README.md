@@ -7,7 +7,7 @@
 ![image](./chrome-capture-2023-8-29.gif)
 
 
-## Installation (dos opciones)
+## Instalación (dos opciones)
 ### Opción 1: Pegar codigo en la consola de la página de zoom
 El código se puede inyectar en la consola cada vez que se quiera utilizar
 
