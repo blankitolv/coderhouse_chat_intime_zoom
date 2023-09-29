@@ -15,5 +15,5 @@ El código se puede inyectar en la consola cada vez que se quiera utilizar
 ```sh
 descargar tampermonkey de las extensiones de google chrome / firefox ó https://www.tampermonkey.net/
 abrir extensión tampermonkey
-utilidades -> importar -> main.js
+dashboard -> importar -> main.js
 ```
