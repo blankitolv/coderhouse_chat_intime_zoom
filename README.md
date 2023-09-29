@@ -8,12 +8,12 @@
 
 
 ## Installation (dos opciones)
-### Opción 1: Pegar codigo en la consola
+### Opción 1: Pegar codigo en la consola de la página de zoom
 El código se puede inyectar en la consola cada vez que se quiera utilizar
 
 ### Opción 2: Inyectarlo mediante tampermonkey
 ```sh
-descargar tampermonkey de las extensiones de google chrome / firefox
+descargar tampermonkey de las extensiones de google chrome / firefox ó https://www.tampermonkey.net/
 abrir extensión tampermonkey
 utilidades -> importar -> main.js
 ```
