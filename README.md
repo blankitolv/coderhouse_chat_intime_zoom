@@ -7,11 +7,11 @@
 ![image](./Grabación%20de%20pantalla%20desde%2028-09-23%2021_35_37.gif)
 
 
-## Installation
-### Pegar codigo en la consola todo el tiempo
+## Installation (dos opciones)
+### Opción 1: Pegar codigo en la consola
 El código se puede inyectar en la consola cada vez que se quiera utilizar
 
-### Inyectarlo mediante tampermonkey
+### Opción 2: Inyectarlo mediante tampermonkey
 ```sh
 descargar tampermonkey de las extensiones de google chrome / firefox
 abrir extensión tampermonkey
